@@ -6,41 +6,40 @@ const Form = ({
   name,
   email,
   message,
-  updateName,
-  updateEmail,
-  updateMessage,
+  setFieldValue,
 }) => {
   return (
     <div className="form">
-      <div>
-        <label htmlFor="name">Name: </label>
+      <label>
+        Name:
         <input
           id="name"
           type="text"
           value={name}
-          onChange={e => updateName(e.target.value)}
+          onChange={e => setFieldValue('name', e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="email">E-mail: </label>
+      </label>
+      <br />
+      <label>
+        E-mail:
         <input
           id="email"
           type="email"
           value={email}
-          onChange={e => updateEmail(e.target.value)}
+          onChange={e => setFieldValue('email', e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="msg">Message:</label>
+      </label>
+      <br />
+      <label>
+        Message:
         <textarea
-          id="msg"
+          id="message"
           value={message}
-          onChange={e => updateMessage(e.target.value)}
+          onChange={e => setFieldValue('message', e.target.value)}
         />
-      </div>
-      <div className="button">
-        <button type="submit">Send your message</button>
-      </div>
+      </label>
+      <br />
+      <button type="submit">Send your message</button>
     </div>
   );
 }
@@ -55,11 +54,9 @@ const createConnectedForm = n => {
   }
 
   const mapDispatchToProps = dispatch => {
-    const saf = type => text => dispatch({type, text});
+    const saf = type => (field, text) => dispatch({type, field, text});
     return {
-      updateName: saf(`FORM_${n}/UPDATE_NAME`),
-      updateEmail: saf(`FORM_${n}/UPDATE_EMAIL`),
-      updateMessage: saf(`FORM_${n}/UPDATE_MESSAGE`)
+      setFieldValue: saf(`FORM_${n}/SET_FIELD_VALUE`),
     }
   }
 

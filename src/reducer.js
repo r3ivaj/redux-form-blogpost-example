@@ -15,21 +15,11 @@ const createReducer = n => (state, action) => {
     console.log('hitting reducer');
   }
   switch (action.type) {
-    case `FORM_${n}/UPDATE_NAME`:
+    case `FORM_${n}/SET_FIELD_VALUE`:
       return {
         ...state,
-        name: action.text
+        [action.field]: action.text
       }
-    case `FORM_${n}/UPDATE_EMAIL`:
-      return {
-        ...state,
-        email: action.text
-      };
-    case `FORM_${n}/UPDATE_MESSAGE`:
-      return {
-        ...state,
-        message: action.text
-      };
     default:
       return state
   }
